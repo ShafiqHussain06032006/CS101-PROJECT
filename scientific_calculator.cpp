@@ -1,57 +1,54 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-double add(){
-cout<<"enter your numbers "<<endl;
-int a, b;
-cin>>a>>b;
-return a+b;
-}
-double subtract(){
-    int a, b;
-    cout<<"enter your numbers "<<endl;
-    cin>>a>>b;
-    return a-b;
-}
-double multiply(){
-     int a, b;
-    cout<<"enter your numbers "<<endl;
-    cin>>a>>b;
-    return a*b;
-}
-double divide(){
-    double a, b;
-    cout<<"enter your numbers "<<endl;
-    cin>>a>>b;
-    if (b==0)
-    {
-        cout<<"math error";
+
+unsigned long long factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
     }
-    return a/b;
 }
-int main()
-{
-    int operation=5;
-   cout<<"enter 1 for addition "<<endl;
-   cout<<"enter 2 for subtraction "<<endl;
-   cout<<"enter 3 for multiplication "<<endl;
-   cout<<"enter 4 for division "<<endl;
-   cin>>operation;
-   switch (operation)
-   {
-   case 1:
-    cout<<add();
-    break;
-   case 2:
-   cout<<subtract();
-   break;
-   case 3:
-   cout<<multiply();
-   break;
-   case 4:
-   cout<<divide();
-   break;
-   default:
-    break;
-   }
+
+unsigned long long permutation(int n, int r) {
+     if (n < r) {
+        return 0;
+    }
+    return factorial(n) / factorial(n - r);
+}
+
+unsigned long long combination(int n, int r) {
+    if (n < r) {
+        return 0;
+    }
+    return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
+int main() {
+    int choice;
+    do {
+        cout << "Enter 1 for Permutation (nPr) :"<<endl;
+        cout << "Enter 2 for Combination (nCr) :"<<endl;
+        cout << "Enter 0 to exit : "<<endl;
+        cin >> choice;
+
+        if (choice == 1 || choice == 2) {
+            int n, r;
+            cout << "Enter value for n: "<<endl;
+            cin >> n;
+            cout << "Enter value for r: "<<endl;
+            cin >> r;
+
+            if (choice == 1) {
+                cout << "Permutation (nPr) is : " << permutation(n, r) << endl;
+            } else {
+                cout << "Combination (nCr) is : " << combination(n, r) << endl;
+            }
+        } else if (choice != 0) {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 0);
+
+    cout << "Exiting...";
+
     return 0;
 }
